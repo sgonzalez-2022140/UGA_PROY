@@ -21,13 +21,13 @@ def numero_letra(numero):
     return abecedario[numero % 26]
 
 # Construcción de la tabla Vigenère, al parecer desplaza el abecedario por medio de una matriz
-vinegre = []
+vigenere = []
 for fila_num in range(26):
     fila = []
     for col_num in range(26):
         letra = numero_letra(fila_num + col_num)
         fila.append(letra)
-    vinegre.append(fila)
+    vigenere.append(fila)
 
 #Codifica una letra usando una letra clave con la tabla Vigenère.
 def codificar_letra(letra, clave_letra):
@@ -41,7 +41,7 @@ def codificar_letra(letra, clave_letra):
     mayuscula = letra.isupper()
     fila = letra_numero(clave_letra)
     columna = letra_numero(letra)
-    nueva_letra = vinegre[fila][columna]
+    nueva_letra = vigenere[fila][columna]
     return nueva_letra if mayuscula else nueva_letra.lower()
 
 #Decodifica una letra usando una letra clave con la tabla Vigenère.
@@ -55,7 +55,7 @@ def decodificar_letra(letra, clave_letra):
 
     mayuscula = letra.isupper()
     fila = letra_numero(clave_letra)
-    fila_letras = vinegre[fila]
+    fila_letras = vigenere[fila]
     columna = fila_letras.index(letra.upper())
     original = numero_letra(columna)
     return original if mayuscula else original.lower()
